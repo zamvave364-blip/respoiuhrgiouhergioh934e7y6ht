@@ -1,0 +1,775 @@
+@font-face {
+  font-family: "SaintAmour";
+  src: url("SaintAmourScript.ttf") format("truetype");
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(#fdecef, #f8dce3);
+  font-family: "SaintAmour", cursive;
+}
+
+/* ===== ЭТАПЫ ===== */
+
+.stage {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  position: relative;
+}
+
+.stage.active {
+  display: block;
+}
+
+/* ===== ЭТАП 1 ===== */
+
+.center {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* сердце */
+.heart {
+  width: 230px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: heartPulse 1.4s infinite;
+  cursor: pointer;
+}
+
+@keyframes heartPulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.12); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* после сердца */
+.after-heart {
+  position: absolute;
+  inset: 0;
+}
+
+.after-heart.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.after-heart.show {
+  opacity: 1;
+  transition: 1s;
+}
+
+/* букет */
+.bouquet {
+  width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 1;
+}
+
+/* конверт */
+.envelope-wrapper {
+  position: absolute;
+  top: 55%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.envelope {
+  width: 240px;
+  cursor: pointer;
+}
+
+.tap-ring {
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: tapPulse 1.6s infinite;
+  pointer-events: none; /* ВОТ ЭТО ГЛАВНОЕ */
+}
+
+
+@keyframes tapPulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ===== ЭТАП 2 ===== */
+
+.letter-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  background: #fffaf4;
+  padding: 40px;
+  border-radius: 18px;
+  max-width: 420px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.letter-text {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.4;
+  color: #5a2a3a;
+}
+
+.next-btn {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 38px;
+  border-radius: 30px;
+  border: none;
+  background: #e3a1b3;
+  color: white;
+  font-size: 22px;
+  font-family: "SaintAmour";
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.next-btn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== ЭТАП 3 ===== */
+
+#stage3 {
+  overflow-y: auto;
+}
+
+.stage3-title {
+  text-align: center;
+  font-size: 48px;
+  margin-top: 30px;
+}
+
+.compliment-block {
+  margin: 60px 20px;
+  text-align: center;
+}
+
+.compliment-text {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.compliment-photos {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.compliment-photos img {
+  width: 45%;
+  border-radius: 18px;
+}
+
+.stage3-btn {
+  position: static;
+  margin: 40px auto 80px;
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== ПОЦЕЛУЙ ===== */
+
+.kiss {
+  position: fixed;
+  inset: 0;
+  background: #fdecef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.kiss.hidden {
+  display: none;
+}
+
+.kiss img {
+  width: 120px;
+  animation: kissZoom 1.4s ease forwards;
+}
+
+@keyframes kissZoom {
+  0% { transform: scale(0.4); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: scale(6); opacity: 0; }
+}
+
+/* ===== ЭТАП 4 ===== */
+
+.stage4-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+/* ===== ЭТАП 4 — ТАЙМЕР ===== */
+
+.timer-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-title {
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+.timer {
+  font-size: 42px;
+  text-align: center;
+  line-height: 1.6;
+}
+/* ===== ЭТАП 4 КРАСИВЫЙ ===== */
+
+.timer-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: fadeStage4 1.2s ease forwards;
+}
+
+@keyframes fadeStage4 {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.timer-text {
+  font-size: 42px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.timer-big {
+  font-size: 56px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* кнопка-риечка */
+.riechka-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 90px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.riechka-btn:hover {
+  transform: scale(1.1);
+}
+
+/* этап 5 заглушка */
+.stage5-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+/* ===== ИГРА С РИЕЧКАМИ ===== */
+
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.riechka {
+  position: absolute;
+  width: 70px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.riechka:hover {
+  transform: scale(1.1);
+}
+/* ===== ЭТАП 4 С ФОТО ===== */
+
+.timer-layout {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.timer-center {
+  text-align: center;
+  max-width: 600px;
+}
+
+.kiss-photo {
+  width: 260px;
+  border-radius: 20px;
+  position: absolute;
+}
+
+.kiss-photo.left {
+  left: 40px;
+}
+
+.kiss-photo.right {
+  right: 40px;
+}
+
+.riechka-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 90px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.riechka-btn:hover {
+  transform: scale(1.1);
+}
+/* ===== ИГРА ===== */
+
+.game-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.riechka {
+  position: absolute;
+  width: 80px;
+  cursor: pointer;
+}
+
+.big-riechka {
+  position: absolute;
+  width: 160px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.big-text {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36px;
+}
+
+.stage6-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+.riechka {
+  position: absolute;
+  width: 80px;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+/* ===== ИГРА ===== */
+
+#stage5 {
+  position: relative;
+  overflow: hidden;
+}
+
+#counter {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  z-index: 1000;
+}
+
+#gameArea {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.riechka {
+  position: absolute;
+  width: 70px;
+  cursor: pointer;
+  transition: transform 3s linear;
+}
+
+.floating-compliment {
+  position: fixed;
+  font-size: 22px;
+  font-weight: bold;
+  pointer-events: none;
+  animation: fadeUp 1.5s forwards;
+}
+
+@keyframes fadeUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-40px); }
+}
+
+.big-riechka {
+  position: absolute;
+  width: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.big-text {
+  position: absolute;
+  top: calc(50% + 90px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+}
+
+/* ЭТАП 6 */
+
+.stage6-center {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.solar {
+  width: 700px;
+  max-width: 90%;
+}
+
+
+/* ЭТАП 7 */
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px;
+}
+
+.gallery img {
+  width: 250px;
+  border-radius: 15px;
+}
+/* ===== ЭТАП 4 ===== */
+
+.stage4-wrapper {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 60px;
+}
+
+.stage4-title {
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.stage4-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
+
+.timer {
+  font-size: 34px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.side-photo {
+  width: 250px;
+  border-radius: 20px;
+}
+
+.riechka-btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.riechka-btn img {
+  width: 90px;
+}
+.stage6-title {
+  font-size: 42px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+/* ===== ПАПКИ ===== */
+
+.folders {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 60px;
+  text-align: center;
+}
+
+.folder {
+  cursor: pointer;
+}
+
+.folder img {
+  width: 120px;
+}
+
+.folder span {
+  display: block;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.gallery-view {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.gallery-view img {
+  width: 100%;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* просмотр */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.viewer img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.close-viewer {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+/* финальный экран */
+
+.final-screen {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.final-screen img {
+  width: 250px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.love-text {
+  font-size: 60px;
+  margin-top: 40px;
+}
+/* ===== ВАУ ПРОСМОТР ===== */
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.viewer-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewer img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+}
+
+.viewer img:active {
+  transform: scale(0.98);
+}
+
+.close-viewer {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  font-size: 60px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+  transform: translateY(-50%);
+}
+
+.nav.left {
+  left: 40px;
+}
+
+.nav.right {
+  right: 40px;
+}
+
+/* анимации */
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* анимация папок */
+
+.folder {
+  transition: transform 0.3s ease;
+}
+
+.folder:hover {
+  transform: scale(1.1);
+}
+#stage7 {
+  position: relative;
+  z-index: 50;
+}
+
+.folder {
+  position: relative;
+  z-index: 60;
+}
+.viewer {
+  pointer-events: auto;
+}
+
+.stage {
+  display: none;
+}
+
+.stage.active {
+  display: block;
+}
+.folder-icon {
+  font-size: 70px;
+}
+.stage {
+  display: none;
+  pointer-events: none;
+}
+
+.stage.active {
+  display: block;
+  pointer-events: auto;
+}
+.stage {
+  display: none;
+  pointer-events: none;
+}
+
+.stage.active {
+  display: block;
+  pointer-events: auto;
+}
+.stage {
+  display: none;
+}
+
+.stage.active {
+  display: block;
+}
